@@ -1,0 +1,1 @@
+Create a struct of C for study C langure
