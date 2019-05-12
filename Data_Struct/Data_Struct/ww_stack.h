@@ -12,14 +12,29 @@ typedef struct ww_seqstack
 	int top;//指示栈顶位置的数组下标
 }ww_seqstack_t;//顺序栈的类型定义
 
-ww_seqstack_t *ww_CreateStack(int len);
-void ww_ClearStack(ww_seqstack_t *s);
-int ww_emptyStack(ww_seqstack_t *s);
-int ww_FullStack(ww_seqstack_t *s);
+ww_seqstack_t *ww_CreateSeqStack(int len);
+void ww_ClearSeqStack(ww_seqstack_t *s);
+void ww_DeleteSeqStack(ww_seqstack_t *s);
+int ww_emptySeqStack(ww_seqstack_t *s);
+int ww_FullSeqStack(ww_seqstack_t *s);
+int ww_Seqstack_push(ww_seqstack_t *s, data_t x);
+data_t ww_Seqstack_pop(ww_seqstack_t *s);
+data_t ww_Seqstack_gettop(ww_seqstack_t *s);
 
-int ww_stack_push(ww_seqstack_t *s, data_t x);
-data_t ww_stack_pop(ww_seqstack_t *s);
-data_t ww_stack_gettop(ww_seqstack_t *s);
+
+typedef struct node {
+	data_t data;
+	struct node *next;
+}ww_linklist_t;
+
+ww_linklist_t *ww_LinkStack_new();
+int ww_LinkStack_empty(ww_linklist_t * l);
+void ww_LinkStack_clear(ww_linklist_t *l);
+void ww_LinkStack_delete(ww_linklist_t *l);
+int ww_LinkStack_push(ww_linklist_t *l, data_t x);
+data_t ww_LinkStack_pop(ww_linklist_t *l);
+data_t ww_LinkStack_gettop(ww_linklist_t *l);
+
 
 
 #endif
