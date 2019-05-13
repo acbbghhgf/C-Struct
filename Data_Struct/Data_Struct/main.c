@@ -1,32 +1,37 @@
 #include "ww_stack.h"
+#include "ww_queue.h"
 
 int main() {
-	ww_seqstack_t *s;
-	ww_linklist_t *l;
-	int n = 10;
-	s = ww_CreateSeqStack(n);
-	l = ww_LinkStack_new();
+	ww_debug("action!\n");
 
-	ww_Seqstack_push(s, 10);
-	ww_Seqstack_push(s, 20);
-	ww_Seqstack_push(s, 30);
-	ww_Seqstack_push(s, 40);
-	
-	
-	ww_LinkStack_push(l, 10);
-	ww_LinkStack_push(l, 20);
-	ww_LinkStack_push(l, 30);
-	ww_LinkStack_push(l, 50);
+	ww_sequeue_t *seq = ww_sequeue_new(10);
+	ww_sequeue_push(seq, 2);
+	ww_sequeue_push(seq, 12);
+	ww_sequeue_push(seq, 4);
+	ww_sequeue_push(seq, 15);
+	ww_sequeue_push(seq, 32);
+	ww_sequeue_push(seq, 11);
 
-	while (!ww_emptySeqStack(s)) {
-		printf("==>%d\n", ww_Seqstack_pop(s));
+	int i = 0;
+	data_t x = 0;
+	while (0 == ww_sequeue_pop(seq, &x))
+	{
+		ww_debug("==> x = [%d]\n", x);
 	}
-	printf("seqstack ======> over\n");
+	ww_debug("seq is empty\n");
+	ww_sequeue_clear(seq);
 	
-	while (!ww_LinkStack_empty(l)) {
-		printf("==>%d\n", ww_LinkStack_pop(l));
+	ww_sequeue_push(seq, 11);
+	ww_sequeue_push(seq, 32);
+	ww_sequeue_push(seq, 15);
+	ww_sequeue_push(seq, 4);
+	while (0 == ww_sequeue_pop(seq, &x))
+	{
+		ww_debug("[xx]==> x = [%d]\n", x);
 	}
-	printf("linkstack ======> over\n");
+	ww_debug("seq is empty scond\n");
+
+	ww_sequeue_delete(seq);
 
 	getchar();
 	return 0;

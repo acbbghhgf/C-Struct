@@ -3,8 +3,9 @@
 #define		WW_STCK__H
 
 #include <stdio.h>
+#include "ww_type.h"
 
-typedef int data_t; //栈中数据元素的数据类型
+//typedef int data_t; //栈中数据元素的数据类型
 typedef struct ww_seqstack
 {
 	data_t *data;	//用指针指向栈的存储空间

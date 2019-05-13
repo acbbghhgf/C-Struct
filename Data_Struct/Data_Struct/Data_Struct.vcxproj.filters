@@ -26,9 +26,18 @@
     <ClCompile Include="main.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ww_queue.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ww_stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ww_queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ww_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
