@@ -3,36 +3,32 @@
 
 int main() {
 	ww_debug("action!\n");
+	ww_linkqueue_t *q = ww_linkqueue_new(10);
+	ww_linkqueue_node_t *node1 = (ww_linkqueue_node_t *)malloc(sizeof(*node1));
+	ww_linkqueue_node_t *node2 = (ww_linkqueue_node_t *)malloc(sizeof(*node2));
+	ww_linkqueue_node_t *node3 = (ww_linkqueue_node_t *)malloc(sizeof(*node3));
+	ww_linkqueue_node_t *node4 = (ww_linkqueue_node_t *)malloc(sizeof(*node4));
 
-	ww_sequeue_t *seq = ww_sequeue_new(10);
-	ww_sequeue_push(seq, 2);
-	ww_sequeue_push(seq, 12);
-	ww_sequeue_push(seq, 4);
-	ww_sequeue_push(seq, 15);
-	ww_sequeue_push(seq, 32);
-	ww_sequeue_push(seq, 11);
+	node1->data = 3;
+	node2->data = 8;
+	node3->data = 12;
+	node4->data = 14;
 
-	int i = 0;
-	data_t x = 0;
-	while (0 == ww_sequeue_pop(seq, &x))
-	{
-		ww_debug("==> x = [%d]\n", x);
-	}
-	ww_debug("seq is empty\n");
-	ww_sequeue_clear(seq);
+	ww_linkqueue_push(q, node1);
+	ww_linkqueue_push(q, node2);
+	ww_linkqueue_push(q, node3);
+	ww_linkqueue_push(q, node4);
 	
-	ww_sequeue_push(seq, 11);
-	ww_sequeue_push(seq, 32);
-	ww_sequeue_push(seq, 15);
-	ww_sequeue_push(seq, 4);
-	while (0 == ww_sequeue_pop(seq, &x))
-	{
-		ww_debug("[xx]==> x = [%d]\n", x);
+	ww_linkqueue_node_t *new_node;
+	while(1) {
+		new_node = ww_linkqueue_pop(q);
+		if (!new_node) {
+			ww_debug("new_node is null\n");
+			break;
+		}
+		ww_debug("new_node = %d\n", new_node->data);
 	}
-	ww_debug("seq is empty scond\n");
-
-	ww_sequeue_delete(seq);
-
+	ww_debug("function is over\n");
 	getchar();
 	return 0;
 }
