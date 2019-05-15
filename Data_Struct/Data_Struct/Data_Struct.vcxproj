@@ -124,10 +124,12 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="ww_queue.c" />
     <ClCompile Include="ww_stack.c" />
+    <ClCompile Include="ww_tree.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ww_queue.h" />
     <ClInclude Include="ww_stack.h" />
+    <ClInclude Include="ww_tree.h" />
     <ClInclude Include="ww_type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
