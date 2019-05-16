@@ -32,6 +32,9 @@
     <ClCompile Include="ww_tree.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="search_test.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ww_stack.h">

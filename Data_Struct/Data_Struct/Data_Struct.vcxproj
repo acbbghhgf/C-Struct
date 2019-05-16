@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="search_test.c" />
     <ClCompile Include="ww_queue.c" />
     <ClCompile Include="ww_stack.c" />
     <ClCompile Include="ww_tree.c" />

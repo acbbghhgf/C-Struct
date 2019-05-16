@@ -1,34 +1,50 @@
 #include "ww_stack.h"
 #include "ww_queue.h"
 
+#define N 10
+int binsearch(int *a, int key);
 int main() {
-	ww_debug("action!\n");
-	ww_linkqueue_t *q = ww_linkqueue_new(10);
-	ww_linkqueue_node_t *node1 = (ww_linkqueue_node_t *)malloc(sizeof(*node1));
-	ww_linkqueue_node_t *node2 = (ww_linkqueue_node_t *)malloc(sizeof(*node2));
-	ww_linkqueue_node_t *node3 = (ww_linkqueue_node_t *)malloc(sizeof(*node3));
-	ww_linkqueue_node_t *node4 = (ww_linkqueue_node_t *)malloc(sizeof(*node4));
-
-	node1->data = 3;
-	node2->data = 8;
-	node3->data = 12;
-	node4->data = 14;
-
-	ww_linkqueue_push(q, node1);
-	ww_linkqueue_push(q, node2);
-	ww_linkqueue_push(q, node3);
-	ww_linkqueue_push(q, node4);
-	
-	ww_linkqueue_node_t *new_node;
-	while(1) {
-		new_node = ww_linkqueue_pop(q);
-		if (!new_node) {
-			ww_debug("new_node is null\n");
+	int a[N] = { 3, 5, 6, 7, 8, 9, 12, 13, 17, 19 };
+	int i, key;
+	while (1)
+	{
+		ww_debug("pls input key:\n");
+		scanf_s("%d", &key);
+		if (key == -1) {
+			ww_debug("退出程序\n");
 			break;
 		}
-		ww_debug("new_node = %d\n", new_node->data);
+		i = binsearch(a, key);
+		if (i == -1) {
+			ww_debug(" search error\n");
+		}
+		else {
+			ww_debug("search %d at %d\n", key, i);
+		}
 	}
 	ww_debug("function is over\n");
-	getchar();
+	//getchar();
+	system("pause");
 	return 0;
+}
+
+int binsearch(int *a, int key) {//折半查找，只能用于有序表查找
+	int low, high, mid;
+	low = 0;
+	high = N - 1;
+	while (low <= high) {
+		mid = (low + high) / 2;//取中间位置
+		if (key == a[mid]) {
+			return mid;//success 查找成功
+		}
+		else if (key < a[mid])
+		{
+			high = mid - 1;//key小于中间值，则high = mid -1
+		}
+		else
+		{
+			low = mid + 1;//key大于中间值，则low = mid + 1
+		}
+	}
+	return -1;//err
 }
