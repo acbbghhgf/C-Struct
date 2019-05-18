@@ -1,50 +1,25 @@
 #include "ww_stack.h"
 #include "ww_queue.h"
+#include "ww_sort.h"
 
-#define N 10
-int binsearch(int *a, int key);
-int main() {
-	int a[N] = { 3, 5, 6, 7, 8, 9, 12, 13, 17, 19 };
-	int i, key;
-	while (1)
-	{
-		ww_debug("pls input key:\n");
-		scanf_s("%d", &key);
-		if (key == -1) {
-			ww_debug("退出程序\n");
-			break;
-		}
-		i = binsearch(a, key);
-		if (i == -1) {
-			ww_debug(" search error\n");
-		}
-		else {
-			ww_debug("search %d at %d\n", key, i);
-		}
+#define N 8
+
+int main(int argc, char **argv) {
+	if (argc > 1) {
+		ww_debug("param = [%s]\n", argv[1]);
 	}
+	int a[N] = { 50, 36, 66, 96, 75, 12, 25, 36};
+	ww_debug("sort action:\n");
+	ww_show_sort(a, N);
+	//ww_seq_sort(a, N);
+	//ww_shell_sort(a, N);
+	ww_quick_sort(a, 0, N - 1);
+
 	ww_debug("function is over\n");
 	//getchar();
+	ww_debug("list sort over:\n");
+	ww_show_sort(a, N);
 	system("pause");
 	return 0;
 }
 
-int binsearch(int *a, int key) {//折半查找，只能用于有序表查找
-	int low, high, mid;
-	low = 0;
-	high = N - 1;
-	while (low <= high) {
-		mid = (low + high) / 2;//取中间位置
-		if (key == a[mid]) {
-			return mid;//success 查找成功
-		}
-		else if (key < a[mid])
-		{
-			high = mid - 1;//key小于中间值，则high = mid -1
-		}
-		else
-		{
-			low = mid + 1;//key大于中间值，则low = mid + 1
-		}
-	}
-	return -1;//err
-}
