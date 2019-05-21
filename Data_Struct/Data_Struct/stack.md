@@ -80,4 +80,52 @@ h(key) = a*key + b
 * 实例参考 ww_sort.c_
 
 
+### 静态库的特点
+* 编译（链接）时静态库中相关的代码复制到可执行文件中。
+* 程序中包含代码，运行时不需要静态库。
+* 程序运行时无需加载库，运行速度更快。
+* 占用更多磁盘空间和内存空间。
+* 静态库升级后，需要重新编译。
 
+####    静态库的创建
+* 确定库中函数的功能、接口。
+* 编写库源码hello.c（如下）
+* 编译生成目标文件
+* gcc -c hello.c -Wall(生成.o文件)
+* 创建静态库hello
+* ar crs libhello.a hello.o
+* 查看库中符号信息，（nm libhello.a）
+
+```
+void hello(){
+    printf("hello world");
+}
+
+void hello();
+int main(){
+    hello();
+    return 0;
+}
+```
+####    链接静态库
+* 编写应用程序调用库中函数
+* 编译test.c并链接静态库libhello.a
+* gcc -o test test.c -L -lhello
+
+####    链接共享库
+* gcc -c -fPIC hello.c bye.c -Wall
+* 确定库中的函数功能及接口
+* 编写库源码
+* gcc -shared -o libcommom.so.1 hello.o bye.o
+* 创建共享库
+* 为共享库创建符号链接
+* ln -s libcommon.so.1 libcommon.so
+* gcc -o test test.c -L. -lcommon
+* 当目录下同时存在静态库和共享库时，编译器首先会寻找链接共享库。
+* 可以添加-static参数指定链接静态库
+* 添加共享库的加载路径：export LD_LIBRARY_PATH=$LD_LIBRART_PATH:.
+
+*让系统能够找到要加载的共享库的三种方法*
+* 把库拷贝到/usr/lib和/lib目录下。
+* 在LD_LIBRARY_PATH环境变量中添加库所在路径。
+* 添加/etc/ld.so.conf.d/*.conf文件，执行ldconfig刷新。
