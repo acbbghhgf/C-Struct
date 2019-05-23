@@ -18,3 +18,7 @@ renice 改变正在运行进程的优先级
 jobs  查看后台进程
 bg  将挂起的进程在后台运行
 fg  把后台运行的进程放到前台运行
+
+锁：
+pthread_mutex_init
+pthread_mutex_lock/pthread_mutex_unlock
