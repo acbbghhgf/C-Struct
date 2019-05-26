@@ -22,3 +22,6 @@ fg  把后台运行的进程放到前台运行
 锁：
 pthread_mutex_init
 pthread_mutex_lock/pthread_mutex_unlock
+
+
+
