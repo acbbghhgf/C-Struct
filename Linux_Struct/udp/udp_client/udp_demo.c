@@ -38,8 +38,9 @@ int main(int argc, char **argv){
         printf("input port = [%d] 38\n", port);
         return -1;
     }
-
-    if(fd = socket(AF_INET, SOCK_DGRAM, 0) < 0){
+    fd = socket(AF_INET, SOCK_DGRAM, 0);
+    //if(fd = socket(AF_INET, SOCK_DGRAM, 0) < 0){// is bad !!
+    if(fd < 0){
         perror("socket fail\n");
         return -1;
     }
@@ -59,6 +60,7 @@ int main(int argc, char **argv){
         bzero(buf, BUFSIZE);
         printf("Please input the string to server:\n");
         if(fgets(buf, BUFSIZE -1, stdin) == NULL){
+            printf("fgets faile\n");
             perror("fgets fail\n");
             continue;
         }

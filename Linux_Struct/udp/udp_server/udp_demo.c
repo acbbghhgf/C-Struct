@@ -13,7 +13,7 @@
 #include<arpa/inet.h>
 
 #define BUFSIZE 128
-#define SERV_PORT 8888
+#define SERV_PORT 19999
 #define QUIT_STR "quit"
 
 int main(){
@@ -32,8 +32,10 @@ int main(){
     bzero(&sin, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_port = htons(SERV_PORT);
-    sin.sin_addr.s_addr = inet_addr("127.0.0.1");
-    int ret = bind(fd, (struct sockaddr *)&sin, sizeof(sin));
+    //sin.sin_addr.s_addr = inet_addr("127.0.0.1");
+    sin.sin_addr.s_addr = INADDR_ANY;//any ip
+    socklen_t serv_len = sizeof(sin);
+    int ret = bind(fd, (struct sockaddr *)&sin, serv_len);
     if(ret < 0){
         perror("bind fail\n");
         return -1;
@@ -46,7 +48,7 @@ int main(){
         bzero(buf, BUFSIZE);
         bzero(ipv4_addr, sizeof(ipv4_addr));
         printf("recv msg waiting...\n");
-        ret = recvfrom(fd, buf, sizeof(buf), 0,(struct sockaddr *)&client_sin, &addrlen);
+        ret = recvfrom(fd, buf, BUFSIZE, 0,(struct sockaddr *)&client_sin, &addrlen);
         printf("recv msg success\n");
         if(ret < 0){
             perror("recvfrom fail\n");
