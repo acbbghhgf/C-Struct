@@ -6,7 +6,7 @@ objs=$(patsubst %.c,%.o,$(src_c) $(wtk_c))
 
 CC=gcc
 INC=-I . -I ./msgpack/include/ -I ./msgpack/ -I ./msgpack/include/msgpack
-CFLAGS=${INC} -O -g #--fast-math -Ofast -Wall -funroll-loops -DUSE_BLAS
+CFLAGS=${INC} -O -g -rpath=. #--fast-math -Ofast -Wall -funroll-loops -DUSE_BLAS
 libasr=test
 
 all: ${objs} $(libasr)
