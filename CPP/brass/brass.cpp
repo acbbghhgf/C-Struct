@@ -87,7 +87,7 @@ void BrassPlus::Withdraw(double amt){
     precis prec = cout.precision(2);
 
     double bal = Balance();
-    //double bal = balance;// can use balance 
+  //  double bal = balance;// not allow use balance, balance is private. 
     if(amt <= bal){
         Brass::Withdraw(amt);
     }
